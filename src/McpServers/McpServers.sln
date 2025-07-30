@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36327.8 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McpServers.Playground", "McpServers.Playground\McpServers.Playground.csproj", "{B6117503-C02C-4213-8691-52C80F268240}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6117503-C02C-4213-8691-52C80F268240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6117503-C02C-4213-8691-52C80F268240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6117503-C02C-4213-8691-52C80F268240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6117503-C02C-4213-8691-52C80F268240}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68E077B4-6812-43D8-9DB2-C260E8BC7CE0}
+	EndGlobalSection
+EndGlobal
