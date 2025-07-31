@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using ModelContextProtocol;
 
 Console.WriteLine("Creating host builder...");
@@ -14,3 +13,5 @@ builder.Services
     .WithTools();
 
 await builder.Build().RunAsync();
+
+Console.WriteLine("Running!");
