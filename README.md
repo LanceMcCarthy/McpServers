@@ -30,6 +30,7 @@ Setup use in your .mcp.json file pointing to your publish folder:
 
 ### Example
 
+<img width="520" height="306" alt="image" src="https://github.com/user-attachments/assets/7d2dba5f-82a8-4046-9d14-18bdc3053541" />
 
 
 ## Future Server
