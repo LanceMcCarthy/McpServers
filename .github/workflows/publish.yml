@@ -36,7 +36,8 @@ jobs:
         password: ${{secrets.DOCKERHUB_PAT}}
 
     - name: Delete Old Image(s)
-      run: curl -X DELETE -H "Authorization: Bearer ${{secrets.DOCKERHUB_PAT}}" https://hub.docker.com/v2/repositories/${{env.REPOSITORY}}/tags/${{env.TAG}}/
+      run: |
+        curl -X DELETE -H 'Authorization: Bearer ${{secrets.DOCKERHUB_PAT}}' https://hub.docker.com/v2/repositories/${{env.REPOSITORY}}/tags/${{env.TAG}}/
 
     - name: Build and Publish Images
       uses: docker/build-push-action@v5
