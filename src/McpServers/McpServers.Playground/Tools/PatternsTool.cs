@@ -9,11 +9,8 @@ public static class PatternsTool
     [McpTool, Description("Provides the Fibonnaci sequence, up until stated limit.")]
     public static string GetFibonacci(string length)
     {
-        if(!GlobalHelpers.Verify())
-            return "You did not provide the correct secret knock! Please set/update the environment variable SECRET_KNOCK to access this tool.";
-
         if (!int.TryParse(length, out var limit) || limit < 0)
-            return "You need to ask for a total limit, otherwise it will list until infinity! Please provide a non-negative integer.";
+            limit = 20;
 
         var sequence = new List<int>();
 
@@ -33,11 +30,8 @@ public static class PatternsTool
     [McpTool, Description("Provides the Tribonacci sequence, up until stated limit.")]
     public static string GetTribonacci(string length)
     {
-        if(!GlobalHelpers.Verify())
-            return "You did not provide the correct secret knock! Please set/update the environment variable SECRET_KNOCK to access this tool.";
-
         if (!int.TryParse(length, out var limit) || limit < 0)
-            return "You need to ask for a total limit, otherwise it will list until infinity! Please provide a non-negative integer.";
+            limit = 20;
 
         var sequence = new List<int>();
 
@@ -58,11 +52,8 @@ public static class PatternsTool
     [McpTool, Description("Provides the Tetranacci sequence, up until stated limit.")]
     public static string GetTetranacci(string length)
     {
-        if(!GlobalHelpers.Verify())
-            return "You did not provide the correct secret knock! Please set/update the environment variable SECRET_KNOCK to access this tool.";
-
         if (!int.TryParse(length, out var limit) || limit < 0)
-            return "You need to ask for a total limit, otherwise it will list until infinity! Please provide a non-negative integer.";
+            limit = 20;
 
         var sequence = new List<int>();
 
@@ -84,11 +75,8 @@ public static class PatternsTool
     [McpTool, Description("Provides the Lucas numbers sequence, up until stated limit.")]
     public static string GetLucas(string length)
     {
-        if(!GlobalHelpers.Verify())
-            return "You did not provide the correct secret knock! Please set/update the environment variable SECRET_KNOCK to access this tool.";
-
         if (!int.TryParse(length, out var limit) || limit < 0)
-            return "You need to ask for a total limit, otherwise it will list until infinity! Please provide a non-negative integer.";
+            limit = 20;
 
         var sequence = new List<int>();
 
