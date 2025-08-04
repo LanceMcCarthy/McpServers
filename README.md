@@ -23,7 +23,7 @@ For a quick start, if you have docker installed, use my published docker image
     "playground": {
       "type": "stdio",
       "command": "docker",
-      "args": ["run -i --rm laurentkempe/mcpserverdocker"]
+      "args": ["run -i --rm lancemccarthy/mcp-playground:latest"]
     }
   }
 }
@@ -61,3 +61,4 @@ Build & Publish the the project to a local folder, then use the publish path in 
 
 
 ...
+
