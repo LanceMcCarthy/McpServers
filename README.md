@@ -23,7 +23,7 @@ For a quick start, if you have docker installed, use my published docker image
     "playground": {
       "type": "stdio",
       "command": "docker",
-      "args": ["run -i --rm lancemccarthy/mcp-playground:latest"]
+      "args": ["run", "-i", "--rm", "docker.io/lancemccarthy/mcp-playground:latest"]
     }
   }
 }
@@ -58,7 +58,4 @@ Build & Publish the the project to a local folder, then use the publish path in 
 ### Example
 
 <img width="520" height="306" alt="image" src="https://github.com/user-attachments/assets/7d2dba5f-82a8-4046-9d14-18bdc3053541" />
-
-
-...
 
