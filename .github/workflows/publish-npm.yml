@@ -21,12 +21,22 @@ jobs:
       - name: Publish app to folder
         run: dotnet publish "src/McpServers/McpServers.Playground/McpServers.Playground.csproj" -c Release -o ./npm_publish
 
+      - name: Get current version from npm
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(npm view @lancemccarthy/mcp-playground version || echo "0.0.0")
+          echo "Current version: $CURRENT_VERSION"
+          IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
+          NEW_PATCH=$((patch + 1))
+          NEW_VERSION="$major.$minor.$NEW_PATCH"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
       - name: Prepare npm package.json
         run: |
           cat <<EOT > ./npm_publish/package.json
           {
             "name": "@lancemccarthy/mcp-playground",
-            "version": "latest",
+            "version": "1.0.0",
             "description": "An MCP server containing proof of concept tools to experiment and explore model context protocol.",
             "publishConfig": {
               "access": "public"
@@ -34,8 +44,7 @@ jobs:
             "bin": {
               "mcp-playground": "McpServers.Playground.exe"
             },
-            "files": [
-              "*"
+              "version": "${{env.NEW_VERSION}}"
             ],
             "engines": {
               "node": ">=16.0.0"
