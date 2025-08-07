@@ -11,6 +11,11 @@ Once open, update it with one of the config options. If you want to speed testin
 
 ## Playground
 
+| Workflow | Status |
+|---|---|
+| npm | [![Publish package to npm](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-npm.yml) |
+| Docker Hub | [![Publish image to DockerHub](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-docker.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-docker.yml) |
+
 ### Option 1 - Docker Image
 
 If you have docker installed, you can use my published docker image.
