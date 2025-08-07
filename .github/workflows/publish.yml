@@ -70,13 +70,13 @@ jobs:
           cat <<EOT > ./npm_publish/package.json
           {
             "name": "@lancemccarthy/mcp-playground",
-            "version": "1.0.0",
+            "version": "latest",
             "description": "An MCP server containing proof of concept tools to experiment and explore model context protocol.",
             "publishConfig": {
               "access": "public"
             },
             "bin": {
-              "mcp-playground": "McpServers.Playground.dll"
+              "mcp-playground": "McpServers.Playground.exe"
             },
             "files": [
               "*"
