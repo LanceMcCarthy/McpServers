@@ -36,7 +36,7 @@ jobs:
           cat <<EOT > ./npm_publish/package.json
           {
             "name": "@lancemccarthy/mcp-playground",
-            "version": "1.0.0",
+            "version": "${{env.NEW_VERSION}}",
             "description": "An MCP server containing proof of concept tools to experiment and explore model context protocol.",
             "publishConfig": {
               "access": "public"
@@ -44,7 +44,8 @@ jobs:
             "bin": {
               "mcp-playground": "McpServers.Playground.exe"
             },
-              "version": "${{env.NEW_VERSION}}"
+            "files": [
+              "*"
             ],
             "engines": {
               "node": ">=16.0.0"
