@@ -6,6 +6,7 @@ on:
 env:
   REPOSITORY: "lancemccarthy/mcp-playground"
   TAG: "latest"
+  PLAYGROUND_CSPROJ: "src/McpServers/McpServers.Playground/McpServers.Playground.csproj"
 
 jobs:
   docker_publish:
@@ -61,9 +62,8 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Publish .NET app
-        run: |
-          dotnet publish src/McpServers/McpServers.Playground/McpServers.Playground.csproj -c Release -o ./npm_publish
+      - name: Publish app to folder
+        run: dotnet publish ${{env.PLAYGROUND_CSPROJ}} -c Release -o ./npm_publish
 
       - name: Prepare npm package.json
         run: |
@@ -72,6 +72,9 @@ jobs:
             "name": "@lancemccarthy/mcp-playground",
             "version": "1.0.0",
             "description": "MCP Playground .NET server as an npm package",
+            "publishConfig": {
+              "access": "public"
+            },
             "bin": {
               "mcp-playground": "McpServers.Playground.dll"
             },
