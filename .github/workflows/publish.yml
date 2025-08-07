@@ -71,7 +71,7 @@ jobs:
           {
             "name": "@lancemccarthy/mcp-playground",
             "version": "1.0.0",
-            "description": "MCP Playground .NET server as an npm package",
+            "description": "An MCP server containing proof of concept tools to experiment and explore model context protocol.",
             "publishConfig": {
               "access": "public"
             },
@@ -79,9 +79,7 @@ jobs:
               "mcp-playground": "McpServers.Playground.dll"
             },
             "files": [
-              "McpServers.Playground.dll",
-              "McpServers.Playground.deps.json",
-              "McpServers.Playground.runtimeconfig.json"
+              "*"
             ],
             "engines": {
               "node": ">=16.0.0"
