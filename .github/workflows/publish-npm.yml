@@ -42,7 +42,7 @@ jobs:
               "access": "public"
             },
             "bin": {
-              "mcp-playground": "McpServers.Playground.exe"
+              "mcp-playground": "McpServers.Playground.dll"
             },
             "files": [
               "*"
