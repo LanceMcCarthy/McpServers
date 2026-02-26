@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "description": "A practical demo that shows you how to develop, publish, and use MCP servers.",
+  "name": "io.github.LanceMcCarthy/McpServers",
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "nuget",
+      "registryBaseUrl": "https://api.nuget.org",
+      "identifier": "Lancelot.Playground.MCP",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "packageArguments": [],
+      "environmentVariables": []
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/LanceMcCarthy/McpServers",
+    "source": "github"
+  }
+}
