@@ -18,14 +18,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Generate version number with date and workflow Run Number
-        id: version-creator
-        shell: pwsh
+      - name: Generate tag version
+        id: tag-creator
         run: |
-          $buildDay = Get-Date -Format "yyyy.Mdd"
-          $runNumber = "$env:GITHUB_RUN_NUMBER"
-          $ver = $buildDay + "." + $runNumber + ".0"
-          echo "DATED_VERSION_NUM=$ver" >> $env:GITHUB_OUTPUT
+          buildDay=`date +%Y.%m.%d`
+          tags="$buildDay.$GITHUB_RUN_NUMBER"
+          echo "VERSION_TAG=$tags" >> $GITHUB_OUTPUT
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -42,7 +40,7 @@ jobs:
       - name: Update MCP server.json version
         shell: pwsh
         run: |
-          $version = "${{steps.version-creator.outputs.DATED_VERSION_NUM}}"
+          $version = "${{steps.tag-creator.outputs.VERSION_TAG}}"
           $jsonPath = "${{env.server_json_path}}"
           $json = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
           $json.version = $version
@@ -52,7 +50,14 @@ jobs:
           $json | ConvertTo-Json -Depth 100 | Set-Content -Path $jsonPath
 
       - name: Pack Package
-        run: dotnet pack ${{env.csproj_path}} -c Release -o bin/Release -p:PackageVersion=${{steps.version-creator.outputs.DATED_VERSION_NUM}} -p:AssemblyVersion=${{steps.version-creator.outputs.DATED_VERSION_NUM}} -p:FileVersion=${{steps.version-creator.outputs.DATED_VERSION_NUM}} 
+        run: |
+          dotnet pack ${{env.csproj_path}} -c Release -o bin/Release \
+            -p:PackageVersion="${{steps.tag-creator.outputs.VERSION_TAG}}" \
+            -p:AssemblyVersion="${{steps.tag-creator.outputs.VERSION_TAG}}.0" \
+            -p:FileVersion="${{steps.tag-creator.outputs.VERSION_TAG}}.0"
 
       - name: Publish Package (NuGet.org)
-        run:  dotnet nuget push bin/Release/*.nupkg --api-key ${{steps.nuget-login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
+        run:  |
+          dotnet nuget push bin/Release/*.nupkg \
+            --api-key ${{steps.nuget-login.outputs.NUGET_API_KEY}} \
+            --source https://api.nuget.org/v3/index.json

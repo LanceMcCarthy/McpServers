@@ -21,19 +21,17 @@ jobs:
 
       - name: Generate version number with date and workflow Run Number
         id: version-creator
-        shell: pwsh
         run: |
-          $buildDay = Get-Date -Format "yyyy.Mdd"
-          $runNumber = "$env:GITHUB_RUN_NUMBER"
-          $ver = $buildDay + "." + $runNumber + ".0"
-          echo "DATED_VERSION_NUM=$ver" >> $env:GITHUB_OUTPUT
+          buildDay=`date +%Y.%m.%d`
+          tags="$buildDay.$GITHUB_RUN_NUMBER"
+          echo "VERSION_TAG=$tags" >> $GITHUB_OUTPUT
 
       - name: Prepare npm package.json
         run: |
           cat <<EOT > ./npm_publish/package.json
           {
             "name": "@lancemccarthy/mcp-playground",
-            "version": "${{steps.version-creator.outputs.DATED_VERSION_NUM}}",
+            "version": "${{steps.version-creator.outputs.VERSION_TAG}}",
             "description": "An MCP server containing proof of concept tools to experiment and explore model context protocol.",
             "publishConfig": {
               "access": "public"
