@@ -23,7 +23,7 @@ jobs:
       - name: Generate version number (YYYY.Mdd.RunNumber)
         id: tag-creator
         run: |
-          buildDay=`date +%Y.%m.%d`
+          buildDay=`date +%Y.%m%d`
           tags="$buildDay.$GITHUB_RUN_NUMBER"
           echo "VERSION_TAG=$tags" >> $GITHUB_OUTPUT
 
