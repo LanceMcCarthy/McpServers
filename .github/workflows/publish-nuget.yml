@@ -2,6 +2,9 @@ name: Publish package to NuGet
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - releases/*
 
 permissions:
   id-token: write # For NuGet Login OIDC, yay!
