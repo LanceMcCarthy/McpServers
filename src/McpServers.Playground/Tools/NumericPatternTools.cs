@@ -3,11 +3,11 @@ using System.ComponentModel;
 
 namespace McpServers.Playground.Tools;
 
-[McpToolType]
-public static class NumericPatternTools
+internal class NumericPatternTools
 {
-    [McpTool, Description("Provides the Fibonnaci sequence, up until stated limit.")]
-    public static string GetFibonacci(string length)
+    [McpServerTool]
+    [Description("Provides the Fibonnaci sequence, up until stated limit.")]
+    public string GetFibonacci([Description("Length of sequence to generate.")] string length = "20")
     {
         if (!int.TryParse(length, out var limit) || limit < 0)
             limit = 20;
@@ -27,8 +27,9 @@ public static class NumericPatternTools
         return string.Join(", ", sequence);
     }
 
-    [McpTool, Description("Provides the Lucas numbers sequence, up until stated limit.")]
-    public static string GetLucas(string length)
+    [McpServerTool]
+    [Description("Provides the Lucas numbers sequence, up until stated limit.")]
+    public string GetLucas([Description("Length of sequence to generate.")] string length = "20")
     {
         if (!int.TryParse(length, out var limit) || limit < 0)
             limit = 20;

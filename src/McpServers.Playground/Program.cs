@@ -1,5 +1,6 @@
-﻿using Microsoft.Extensions.Hosting;
-using ModelContextProtocol;
+﻿using McpServers.Playground.Tools;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 Console.WriteLine("Creating host builder...");
 
@@ -10,7 +11,8 @@ Console.WriteLine("Adding MCP tools...");
 builder.Services 
     .AddMcpServer()  
     .WithStdioServerTransport()   
-    .WithTools();
+    .WithTools<DynamicTools>()
+    .WithTools<NumericPatternTools>();
 
 await builder.Build().RunAsync();
 

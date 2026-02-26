@@ -6,11 +6,11 @@ using System.Text.Json;
 
 namespace McpServers.Playground.Tools;
 
-[McpToolType]
-public static class DynamicTools
+internal class DynamicTools
 {
-    [McpTool, Description("Gets the current date/time and location infor for the given lat,long coordinates (format: 'lat,long').")]
-    public static string GetLatLongInfo(string coordinates)
+    [McpServerTool]
+    [Description("Gets the current date/time and location infor for the given lat,long coordinates.")]
+    public string GetLatLongInfo([Description("Latitude and longitude coordinates (format: 'lat,long')")] string coordinates)
     {
         if (string.IsNullOrWhiteSpace(coordinates))
             return "Invalid coordinates format. Use 'lat,long'.";

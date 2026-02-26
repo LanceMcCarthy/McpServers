@@ -6,10 +6,25 @@
     <Nullable>enable</Nullable>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>c13b8754-96d9-4a8f-8d14-daf5c07f4e68</UserSecretsId>
+    
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Lance McCarthy</Authors>
+    <Company>Lancelot Software, LLC</Company>
+    <Description>A practical demo that shows you how to develop, publish, and use MCP servers.</Description>
+    <RepositoryType>GitHub</RepositoryType>
+    <PackageProjectUrl>https://github.com/LanceMcCarthy/McpServers</PackageProjectUrl>
+    <Copyright>Copyright © 2026</Copyright>
+    <RepositoryUrl>https://github.com/LanceMcCarthy/McpServers</RepositoryUrl>
+    <PackageTags>mcp</PackageTags>
+    <PackageLicenseExpression>The Unlicense</PackageLicenseExpression>
+    <SignAssembly>false</SignAssembly>
+    <DelaySign>false</DelaySign>
+    <LangVersion>latest</LangVersion>
+    <GenerateSBOM>true</GenerateSBOM>
+    <PackageVersion>2026.226.1.0</PackageVersion>
+    <AssemblyVersion>2026.226.1.0</AssemblyVersion>
+    <FileVersion>2026.226.1.0</FileVersion>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include=".mcp\server.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
@@ -18,5 +33,4 @@
     <PackageReference Include="NodaTime" Version="3.3.0" />
     <PackageReference Include="TimeZoneConverter" Version="7.2.0" />
   </ItemGroup>
-
 </Project>
