@@ -16,7 +16,7 @@
     <Copyright>Copyright © 2026</Copyright>
     <RepositoryUrl>https://github.com/LanceMcCarthy/McpServers</RepositoryUrl>
     <PackageTags>mcp</PackageTags>
-    <PackageLicenseExpression>The Unlicense</PackageLicenseExpression>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
     <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
     <LangVersion>latest</LangVersion>
