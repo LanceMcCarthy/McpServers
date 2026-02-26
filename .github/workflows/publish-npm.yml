@@ -10,8 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
@@ -21,22 +19,21 @@ jobs:
       - name: Publish app to folder
         run: dotnet publish "src/McpServers.Playground/McpServers.Playground.csproj" -c Release -r win-x64 --self-contained /p:PublishReadyToRun=true /p:PublishSingleFile=true -o ./npm_publish
 
-      - name: Get current version from npm
-        id: get_version
+      - name: Generate version number with date and workflow Run Number
+        id: version-creator
+        shell: pwsh
         run: |
-          CURRENT_VERSION=$(npm view @lancemccarthy/mcp-playground version || echo "0.0.0")
-          echo "Current version: $CURRENT_VERSION"
-          IFS='.' read -r major minor patch <<< "$CURRENT_VERSION"
-          NEW_PATCH=$((patch + 1))
-          NEW_VERSION="$major.$minor.$NEW_PATCH"
-          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          $buildDay = Get-Date -Format "yyyy.Mdd"
+          $runNumber = "$env:GITHUB_RUN_NUMBER"
+          $ver = $buildDay + "." + $runNumber + ".0"
+          echo "DATED_VERSION_NUM=$ver" >> $env:GITHUB_OUTPUT
 
       - name: Prepare npm package.json
         run: |
           cat <<EOT > ./npm_publish/package.json
           {
             "name": "@lancemccarthy/mcp-playground",
-            "version": "${{env.NEW_VERSION}}",
+            "version": "${{steps.version-creator.outputs.DATED_VERSION_NUM}}",
             "description": "An MCP server containing proof of concept tools to experiment and explore model context protocol.",
             "publishConfig": {
               "access": "public"

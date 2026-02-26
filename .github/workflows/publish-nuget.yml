@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  id-token: write # OIDC
+  id-token: write # For NuGet Login OIDC, yay!
 
 env:
   csproj_path: src/McpServers.Playground/McpServers.Playground.csproj
@@ -17,8 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Generate version number with date and workflow Run Number
         id: version-creator
@@ -58,19 +56,3 @@ jobs:
 
       - name: Publish Package (NuGet.org)
         run:  dotnet nuget push bin/Release/*.nupkg --api-key ${{steps.nuget-login.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
-
-
-      # - name: Fetch secrets from AKeyless
-      #   id: akeyless
-      #   uses: LanceMcCarthy/akeyless-action@v5
-      #   with:
-      #     access-id: 'p-4blpeo5zdfeaom'
-      #     static-secrets: |
-      #       {
-      #         "/nuget/nuget-api-key":"NUGET_API_KEY"
-      #       }
-      #     export-secrets-to-outputs: true
-      #     export-secrets-to-environment: false
-
-      # - name: Publish app to folder
-      #   run: dotnet nuget push bin/Release/*.nupkg --api-key ${{steps.akeyless.outputs.NUGET_API_KEY}} --source https://api.nuget.org/v3/index.json
