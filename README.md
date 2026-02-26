@@ -13,24 +13,24 @@ Once open, update it with one of the config options. If you want to speed testin
 
 | Workflow | Status |
 |---|---|
-| npm | [![Publish package to npm](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-npm.yml) |
-| Docker Hub | [![Publish image to DockerHub](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-docker.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-docker.yml) |
+| main | [![Build Main (smoketest)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/main.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/main.yml) |
+| publish (NuGet) | [![Publish package to NuGet](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-nuget.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-nuget.yml) |
+| publish (npm) | [![Publish package to npm](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-npm.yml) |
+| publish (docker) | [![Publish image to DockerHub](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-docker.yml/badge.svg)](https://github.com/LanceMcCarthy/McpServers/actions/workflows/publish-docker.yml) |
 
-### Option 1 - Docker Image
 
-If you have docker installed, you can use my published docker image.
+### Option 1 - NuGet Tool (.NET 10 or later) 
+
+Use the new, easier, dotnet `dnx` approach, as a global tool:
 
 ```json
 {
-  "inputs": [
-  ],
   "servers": {
-    //... ADD THIS
-    "playground": {
+    "mcp-playground": {
       "type": "stdio",
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "docker.io/lancemccarthy/mcp-playground:latest"]
-    }
+      "command": "dnx",
+      "args": ["Lancelot.Playground.MCP", "--yes"]
+    },
   }
 }
 ```
@@ -41,14 +41,27 @@ You can also use node to run the mcp server, this config uses my published npm p
 
 ```json
 {
-  "inputs": [
-  ],
   "servers": {
-    //... ADD THIS
-    "playground": {
+    "mcp-playground": {
       "type": "stdio",
       "command": "npx",
       "args": ["-y", "@lancemccarthy/mcp-playground@latest"]
+    }
+  }
+}
+```
+
+### Option 3 - Docker Image
+
+If you have docker installed, you can use my published docker image.
+
+```json
+{
+  "servers": {
+    "mcp-playground": {
+      "type": "stdio",
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "docker.io/lancemccarthy/mcp-playground:latest"]
     }
   }
 }
