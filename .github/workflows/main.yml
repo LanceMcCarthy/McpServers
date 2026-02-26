@@ -35,7 +35,7 @@ jobs:
       - name: Update MCP server.json version
         shell: pwsh
         run: |
-          $version = "${{steps.version-creator.outputs.DATED_VERSION_NUM}}"
+          $version = "${{steps.tag-creator.outputs.VERSION_TAG}}"
           $jsonPath = "${{env.server_json_path}}"
           $json = Get-Content -Path $jsonPath -Raw | ConvertFrom-Json
           $json.version = $version
