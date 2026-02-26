@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
       with:
         fetch-depth: 0
 
@@ -40,9 +40,9 @@ jobs:
         curl -X DELETE -H 'Authorization: Bearer ${{secrets.DOCKERHUB_PAT}}' https://hub.docker.com/v2/repositories/${{env.REPOSITORY}}/tags/${{env.TAG}}/
 
     - name: Build and Publish Images
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
-        context: src/McpServers/McpServers.Playground
+        context: src/McpServers.Playground
         platforms: linux/arm64,linux/amd64
         push: true
         tags: ${{env.REPOSITORY}}:${{env.TAG}}
