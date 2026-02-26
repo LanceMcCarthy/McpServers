@@ -2,7 +2,15 @@ name: Publish package to npm
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - releases/*
 
+permissions:
+  id-token: write  # Trusted publishing OIDC
+  contents: read
+env:
+  OUTPUT_FOLDER: "./npm_publish"
 jobs:
   npm_publish:
     name: "Publish to NPM"
@@ -17,7 +25,14 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Publish app to folder
-        run: dotnet publish "src/McpServers.Playground/McpServers.Playground.csproj" -c Release -r win-x64 --self-contained /p:PublishReadyToRun=true /p:PublishSingleFile=true -o ./npm_publish
+        run: |
+          dotnet publish "src/McpServers.Playground/McpServers.Playground.csproj" \ 
+            -c Release \ 
+            -r win-x64 \ 
+            -o ${{env.OUTPUT_FOLDER}} \ 
+            --self-contained \ 
+            /p:PublishReadyToRun=true \ 
+            /p:PublishSingleFile=true
 
       - name: Generate version number with date and workflow Run Number
         id: version-creator
@@ -28,7 +43,7 @@ jobs:
 
       - name: Prepare npm package.json
         run: |
-          cat <<EOT > ./npm_publish/package.json
+          cat <<EOT > ${{env.OUTPUT_FOLDER}}/package.json
           {
             "name": "@lancemccarthy/mcp-playground",
             "version": "${{steps.version-creator.outputs.VERSION_TAG}}",
@@ -51,13 +66,13 @@ jobs:
           }
           EOT
 
-      - name: Add .npmrc for authentication
-        run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ./npm_publish/.npmrc
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
+      # Uses OIDC token for authentication instead of short-lived npm token, so no need to create .npmrc file
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Publish to npm
+        working-directory: ${{env.OUTPUT_FOLDER}}
         run: npm publish --access public
-        working-directory: ./npm_publish
-        env:
-          NPM_TOKEN: ${{secrets.NPM_TOKEN}}
