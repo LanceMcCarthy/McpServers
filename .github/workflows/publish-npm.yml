@@ -54,6 +54,14 @@ jobs:
               "node": ">=16.0.0"
             },
             "keywords": ["mcp", ".net", "playground"],
+            "repository": {
+              "type": "git",
+              "url": "https://github.com/LanceMcCarthy/McpServers"
+            },
+            "homepage": "https://github.com/LanceMcCarthy/McpServers#readme",
+            "bugs": {
+              "url": "https://github.com/LanceMcCarthy/McpServers/issues"
+            },
             "author": "Lance McCarthy",
             "license": "MIT"
           }
